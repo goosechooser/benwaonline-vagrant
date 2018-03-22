@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  memcached:
+    image: memcached
+    container_name: memcached-dev
+    ports:
+      - 11211:11211
+
+  memcached-test:
+    image: memcached
+    container_name: memcached-test-dev
+    ports:
+      - 11212:11212
+    command: memcached -p 11212
+
+  mysql-dev:
+    image: mysql/mysql-server
+    container_name: db
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysql-db:/var/lib/mysql
+      - ./initdb.d:/docker-entrypoint-initdb.d
+
+volumes:
+  mysql-db:
+
+networks:
+  default:
+    external:
+      name: dev
