@@ -7,8 +7,8 @@ Vagrant.configure("2") do |config|
   config.vm.define :jenkins do |jenkins_config|
       jenkins_config.vm.hostname = 'jenkins'
       jenkins_config.vm.network "private_network", ip: "192.168.10.11"
-      config.vm.network "forwarded_port", guest: 3306, host: 3306
-  end
+      jenkins_config.vm.network "forwarded_port", guest: 3306, host: 3306
+    end
 
   config.vm.provider :virtualbox do |virtualbox_config|
       virtualbox_config.name = "Jenkins - Ubuntu 16.04"
