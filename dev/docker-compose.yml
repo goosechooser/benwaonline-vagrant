@@ -1,18 +1,13 @@
 version: '3.4'
 
 services:
-  memcached:
-    image: memcached
-    container_name: memcached-dev
+  redis:
+    image: redis:alpine
+    container_name: redis-dev
     ports:
-      - 11211:11211
-
-  memcached-test:
-    image: memcached
-    container_name: memcached-test-dev
-    ports:
-      - 11212:11212
-    command: memcached -p 11212
+      - 6379:6379
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
 
   mysql-dev:
     image: mysql/mysql-server
