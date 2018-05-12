@@ -3,6 +3,7 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
+  config.disksize.size = '30GB'
 
   config.vm.define :jenkins do |jenkins_config|
       jenkins_config.vm.hostname = 'jenkins'
@@ -17,5 +18,5 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, path: "bootstrap.sh"
   config.vm.provision :shell, path: "startup.sh", run: 'always'
 
-  config.vm.synced_folder "", "/var/www/html", nfs: true, mount_options: ["actimeo=2"]
+  # config.vm.synced_folder "", "/var/www/html", nfs: true, mount_options: ["actimeo=2"]
 end
